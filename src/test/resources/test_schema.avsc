@@ -1,0 +1,21 @@
+{
+  "namespace": "io.sspinc.feed.avro",
+  "name": "product",
+  "type": "record",
+  "fields": [
+    {"name": "id", "type": "string"},
+    {"name": "look_id", "type": ["string", "null"], "aliases": ["color_id", "photo_group_id"]},
+    {"name": "product_id", "type": "string", "aliases": ["item_group_id"]},
+    {"name": "name", "type": ["string", "null"], "aliases": ["title"]},
+    {"name": "description", "type": ["string", "null"]},
+    {"name": "gender", "type": {
+      "type":"enum", "name":"gender_values", "symbols":["male", "female", "unisex"]
+    }},
+    {"name": "age_group", "type": {
+      "type":"enum", "name":"age_group_values", "symbols":["newborn", "infant", "toddler", "kids", "adults"]
+    }},
+    {"name": "sale_price", "type": ["double", "null"]},
+    {"name": "return_days", "type": ["int", "null"]},
+    {"name": "additional_image_link", "type": [{ "type": "array", "items": "string" }, "null"]}
+  ]
+}

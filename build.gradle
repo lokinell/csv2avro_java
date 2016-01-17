@@ -1,0 +1,53 @@
+plugins {
+  id "com.commercehub.gradle.plugin.avro" version "0.3.4"
+}
+
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'application'
+apply plugin: "com.commercehub.gradle.plugin.avro"
+
+mainClassName = 'CsvToAvro'
+version = '1.0'
+
+repositories {
+  mavenCentral()
+  jcenter()
+}
+
+dependencies {
+  compile (
+    [group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.2.2'],
+    [group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.2.2'],
+    [group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.2.2'],
+    [group: 'com.commercehub.gradle.plugin', name: 'gradle-avro-plugin', version: '0.3.4']
+  )
+
+  testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+jar {
+  description = "Test description"
+  doFirst {
+    into( 'lib' ) {
+      from configurations.compile
+    }
+  }
+
+  manifest {
+    attributes 'Main-Class': 'CsvToAvro'
+  }
+}
+
+//create a single Jar with all dependencies
+task fatJar(type: Jar) {
+	manifest {
+        attributes 'Implementation-Title': 'Gradle Jar File Example',  
+        	'Implementation-Version': version,
+        	'Main-Class': 'CsvToAvro'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}

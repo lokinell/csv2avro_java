@@ -1,0 +1,52 @@
+{
+  "namespace": "io.sspinc.feed.avro",
+  "name": "product",
+  "type": "record",
+  "fields": [
+    {"name": "id", "type": "string"},
+    {"name": "look_id", "type": ["string", "null"], "aliases": ["color_id", "photo_group_id"]},
+    {"name": "product_id", "type": "string", "aliases": ["item_group_id"]},
+    {"name": "name", "type": ["string", "null"], "aliases": ["title"]},
+    {"name": "description", "type": ["string", "null"]},
+    {"name": "gender", "type": {
+      "type":"enum", "name":"gender_values", "symbols":["male", "female", "unisex"]
+    }},
+    {"name": "age_group", "type": {
+      "type":"enum", "name":"age_group_values", "symbols":["newborn", "infant", "toddler", "kids", "adults"]
+    }},
+    {"name": "brand", "type": "string"},
+    {"name": "product_category", "type": ["string", "null"]},
+    {"name": "product_type", "type": "string"},
+    {"name": "link", "type": "string"},
+    {"name": "mobile_link", "type": ["string", "null"]},
+    {"name": "image_link", "type": ["string", "null"]},
+    {"name": "additional_image_link", "type": [{ "type": "array", "items": "string" }, "null"]},
+    {"name": "condition", "type": {
+      "type":"enum", "name":"condition_values", "symbols":["new","used"], "default": "new"}
+    },
+    {"name": "color", "type": ["string", "null"]},
+    {"name": "material", "type": ["string", "null"]},
+    {"name": "pattern", "type": ["string", "null"]},
+    {"name": "size", "type": "string"},
+    {"name": "size_type", "type":{
+      "type":"enum", "name":"size_type_values", "symbols":["regular", "petite", "plus", "big", "tall", "big_and_tall", "maternity"]
+      }, "default": "regular"
+    },
+    {"name": "size_system", "type":{
+      "type":"enum", "name":"size_system_values", "symbols":["us", "uk", "eu", "de", "fr", "jp", "cn", "it", "br", "mex", "au"]
+      }, "default": "US"
+    },
+
+    {"name": "availability", "type":{
+      "type":"enum", "name":"availability_values", "symbols":["in_stock", "out_of_stock", "preorder"]
+      }, "default": "in_stock"
+    },
+    {"name": "availability_date", "type": ["string", "null"]},
+    {"name": "price", "type": ["double", "null"]},
+    {"name": "sale_price", "type": ["double", "null"]},
+    {"name": "return_days", "type": ["int", "null"]},
+
+    {"name": "gtin", "type": ["string", "null"]},
+    {"name": "mpn", "type": ["string", "null"]}
+  ]
+}
